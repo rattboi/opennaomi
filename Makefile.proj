@@ -5,25 +5,25 @@
 # one of these files is not found, make will complain about a
 # missing missing `build/naomi.bin' target, so make sure all of
 # these files exist.
+NAOMITOOLCHAIN=/opt/toolchains/naomi
+
 SRCS += main.c # mie_fw.c
 
 # Pick up base makefile rules common to all examples.
-include ../../Makefile.base
+include ${NAOMITOOLCHAIN}/dragonminded/Makefile.base
 
-#GAMES = ~/Downloads/Naomi/Games/
+GAMES = /games
 
 # Provide the top-level ROM creation target for this binary.
 # See scripts.makerom for details about what is customizable.
-#menu.bin: 
-#	PYTHONPATH=../../../ python3 -m scripts.menugen $(GAMES) > menu.bin
+all: makemenu a_menu.bin
 
-#mie_fw.c: z80_fw_1.bin
-#	$(BIN2C) mie_fw.c z80_fw_1.bin
-
-all: a_menu.bin
+.PHONY: makemenu
+makemenu:
+	python3 -m scripts.menugen $(GAMES) > menudata.bin
 
 a_menu.bin: build/naomi.bin menudata.bin
-	PYTHONPATH=../../../ python3 -m scripts.makerom $@ \
+	PYTHONPATH=${NAOMITOOLCHAIN} python3 -m scripts.makerom $@ \
 		--title "AAA Cabinet Menu" \
 		--publisher "Rattboi" \
 		--section $<,0xc021000 \

@@ -1,2 +1,4 @@
 build/
 *.bin
+wip/
+__pycache__

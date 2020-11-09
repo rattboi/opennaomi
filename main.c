@@ -23,7 +23,6 @@ void display()
 
 void main()
 {
-    
     #define MENU_SECTION 0xC030000
     volatile unsigned char *menu_section = (volatile unsigned char *)MENU_SECTION;
 
