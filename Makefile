@@ -12,9 +12,17 @@ build:
 	docker run --rm -it \
 		-u `id -u ${USER}`:`id -g ${USER}` \
 		--mount type=bind,source=`pwd`,target=/src \
+		rattboi/naomi-build:latest \
+		make -f Makefile.proj ${TARGET}
+
+.PHONY: menu
+menu:
+	docker run --rm -it \
+		-u `id -u ${USER}`:`id -g ${USER}` \
+		--mount type=bind,source=`pwd`,target=/src \
 		--mount type=bind,source=${GAMES},target=/games \
 		rattboi/naomi-build:latest \
-		make -f Makefile.proj makemenu ${TARGET}
+		make -f Makefile.proj menu
 
 .PHONY: clean
 clean:

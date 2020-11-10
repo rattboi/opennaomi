@@ -4,6 +4,7 @@ import sys
 import glob
 from typing import Dict
 
+# Hack to add the libnaomi scripts to the python system path
 sys.path.append(r'/opt/toolchains/naomi')
 
 from naomi import NaomiRom
@@ -34,6 +35,7 @@ def main() -> int:
         naomi = NaomiRom(data)
         if naomi.valid:
             print(f"{naomi.names[NaomiRom.REGION_JAPAN].strip('- '):>32} - ({naomi.date}) - [{naomi.publisher}]")
+    print("^")
 
 if __name__ == "__main__":
     sys.exit(main())
