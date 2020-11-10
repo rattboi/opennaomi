@@ -16,10 +16,10 @@ GAMES = /games
 
 # Provide the top-level ROM creation target for this binary.
 # See scripts.makerom for details about what is customizable.
-all: makemenu a_menu.bin
+all: menu a_menu.bin
 
-.PHONY: makemenu
-makemenu:
+.PHONY: menu
+menu:
 	python3 -m scripts.menugen $(GAMES) > menudata.bin
 
 a_menu.bin: build/naomi.bin menudata.bin
